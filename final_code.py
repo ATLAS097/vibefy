@@ -1,12 +1,19 @@
 import streamlit as st
 import random
 from googleapiclient.discovery import build
-
+import dotenv
+import requests
 import os
-from transformers import pipeline
+# from transformers import pipeline
 
 # Load environment variables
 YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
+HF_TOKEN = st.secrets["HF_TOKEN"]
+
+# Load environment variables from .env file
+# dotenv.load_dotenv()  
+# YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+# HF_TOKEN = os.getenv("HF_TOKEN")
 
 def search_youtube_video(query, api_key):
     youtube = build("youtube", "v3", developerKey=api_key) # create a YouTube API client
@@ -39,7 +46,7 @@ def search_youtube_video(query, api_key):
 def get_emotion_label(text):
     api_url = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
     headers = {
-        "Authorization": f"Bearer {st.secrets['HF_TOKEN']}"
+        "Authorization": f"Bearer {HF_TOKEN}"
     }
     response = requests.post(api_url, headers=headers, json={"inputs": text})
 
@@ -71,8 +78,9 @@ if input_method == "Type my feeling":
         # Use the pretrained model to classify emotions
         # results = mood_classifier(user_input)
         results = get_emotion_label(user_input)
+        print("Results from HuggingFace API:", results)  # Debugging line to see the results
         if results:
-            final_mood = results[0][0]['label'].lower()
+            final_mood = results.lower()
         else:
             final_mood = "unknown"
 
