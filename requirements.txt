@@ -1,4 +1,4 @@
 streamlit
 google-api-python-client
-transformers
-torch
+transformers==4.39.3
+torch==2.1.2
