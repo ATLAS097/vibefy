@@ -1,13 +1,12 @@
 import streamlit as st
 import random
 from googleapiclient.discovery import build
-from dotenv import load_dotenv
+
 import os
 from transformers import pipeline
 
 # Load environment variables
-load_dotenv()
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 
 def search_youtube_video(query, api_key):
     youtube = build("youtube", "v3", developerKey=api_key) # create a YouTube API client
