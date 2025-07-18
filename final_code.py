@@ -30,11 +30,29 @@ def search_youtube_video(query, api_key):
 
 
 # Load emotion classification model
-mood_classifier = pipeline(
-    "text-classification", #type of model
-    model="j-hartmann/emotion-english-distilroberta-base", # pretrained model
-    top_k=1 # return only the top 1 prediction
-)
+# mood_classifier = pipeline(
+#     "text-classification", #type of model
+#     model="j-hartmann/emotion-english-distilroberta-base", # pretrained model
+#     top_k=1 # return only the top 1 prediction
+# )
+
+def get_emotion_label(text):
+    api_url = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
+    headers = {
+        "Authorization": f"Bearer {st.secrets['HF_TOKEN']}"
+    }
+    response = requests.post(api_url, headers=headers, json={"inputs": text})
+
+    try:
+        result = response.json()
+        if isinstance(result, list) and len(result) > 0:
+            top_label = result[0][0]["label"].lower()
+            return top_label
+    except Exception as e:
+        st.error("Error from HuggingFace API")
+        print(e)
+
+    return "unknown"
 
 st.title("Mood Detector App 😊")
 
@@ -51,7 +69,8 @@ if input_method == "Type my feeling":
     )
     if user_input:
         # Use the pretrained model to classify emotions
-        results = mood_classifier(user_input)
+        # results = mood_classifier(user_input)
+        results = get_emotion_label(user_input)
         if results:
             final_mood = results[0][0]['label'].lower()
         else:
