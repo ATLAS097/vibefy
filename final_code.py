@@ -21,10 +21,9 @@ def search_youtube_video(query, api_key):
         q=query, # search term
         part="snippet", # request metadata
         type="video", # search only videos
-        maxResults=5, # no of results
+        videoCategoryId="10",  # Music category
+        maxResults=10, # no of results
         videoEmbeddable="true", # only return videos that can be embedded into app
-        order="relevance", # order by relevance
-        videoDuration="medium"  # Excludes short videos (like Shorts)
     )
     response = request.execute() # send request to YouTube API
     videos = response.get("items", []) # get the list of videos from the response
@@ -131,8 +130,8 @@ if final_mood != "unknown": # if mood is found
 
     # Create query based on input method
     if input_method == "Type my feeling": 
-        # search_query = f"{final_mood} official music video for when you feel\"{user_input}\""
-        search_query = f"recommend me a official song where mood is {final_mood} when i m feeling \"{user_input}\""
+        search_query = f"{final_mood} official music video for when you feel\"{user_input}\""
+        # search_query = f"recommend me a official song where mood is {final_mood} when i m feeling \"{user_input}\""
     elif input_method == "Select from dropdown":
         search_query = f"{final_mood} official song audio lyrics"
     
