@@ -24,7 +24,7 @@ def search_youtube_video(query, api_key):
         maxResults=5, # no of results
         videoEmbeddable="true", # only return videos that can be embedded into app
         order="relevance", # order by relevance
-        videoDuration="long"  # Excludes short videos (like Shorts)
+        videoDuration="medium"  # Excludes short videos (like Shorts)
     )
     response = request.execute() # send request to YouTube API
     videos = response.get("items", []) # get the list of videos from the response
