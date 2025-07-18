@@ -22,7 +22,9 @@ def search_youtube_video(query, api_key):
         part="snippet", # request metadata
         type="video", # search only videos
         maxResults=5, # no of results
-        videoEmbeddable="true" # only return videos that can be embedded into app
+        videoEmbeddable="true", # only return videos that can be embedded into app
+        order="relevance", # order by relevance
+        videoDemonetizationStatus="monetized" # only return monetized videos
     )
     response = request.execute() # send request to YouTube API
     videos = response.get("items", []) # get the list of videos from the response
