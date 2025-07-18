@@ -21,7 +21,7 @@ def search_youtube_video(query, api_key):
         q=query, # search term
         part="snippet", # request metadata
         type="video", # search only videos
-        maxResults=10, # no of results
+        maxResults=5, # no of results
         videoEmbeddable="true" # only return videos that can be embedded into app
     )
     response = request.execute() # send request to YouTube API
