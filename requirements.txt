@@ -1,4 +1,4 @@
-streamlit
-google-api-python-client
-transformers==4.39.3
+streamlit==1.35.0
+google-api-python-client==2.123.0
+transformers==4.37.2
 torch==2.1.2
