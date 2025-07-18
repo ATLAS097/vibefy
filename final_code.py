@@ -141,7 +141,7 @@ if recommended_song:
     st.markdown(f"#### Video Name: [{video_title}]({recommended_song})")
     st.video(recommended_song)
 else:
-    st.write("Tell me how you feel to get a recommended song!")
+    st.write("Sorry, no video found for your mood. Please write your feeling again.")
 
 
 
