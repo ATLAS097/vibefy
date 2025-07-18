@@ -129,7 +129,8 @@ if final_mood != "unknown": # if mood is found
 
     # Create query based on input method
     if input_method == "Type my feeling": 
-        search_query = f"{final_mood} official music video for when you feel\"{user_input}\""
+        # search_query = f"{final_mood} official music video for when you feel\"{user_input}\""
+        search_query = f"recommend me a official song where mood is {final_mood} when i m feeling \"{user_input}\""
     elif input_method == "Select from dropdown":
         search_query = f"{final_mood} official song audio lyrics"
     
