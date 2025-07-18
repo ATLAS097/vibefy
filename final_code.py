@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 from googleapiclient.discovery import build
-import dotenv
+# import dotenv
 import requests
 import os
 # from transformers import pipeline
